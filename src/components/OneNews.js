@@ -34,6 +34,7 @@ console.log("kids", kids)
           <Small>{new Date(time).toString().split('(')[0]}</Small>
         </div>
       </div>
+
     </ListItem>
   );
 };

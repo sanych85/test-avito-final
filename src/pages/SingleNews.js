@@ -1,12 +1,17 @@
 import React, { useEffect, useState } from 'react';
 import { useHistory, useParams } from 'react-router';
 import styled from 'styled-components';
-import { getInfo } from '../utils';
+import { getInfo, getItem } from '../utils';
 import { Heading } from '../components';
 import { Link } from 'react-router-dom';
 import { Comments } from '../components';
 import { baseUrl } from '../apiInfo';
+import {useSelector} from "react-redux"
+
+
 const SingleNews = () => {
+  const news = useSelector(state => state.news.news)
+  console.log("news" , news)
   const history = useHistory();
 
   const params = useParams();
@@ -37,7 +42,7 @@ const SingleNews = () => {
         kids,
       });
     });
-  }, [urlLink]);
+  }, []);
   return (
     <SingleItemWrapper className = "neeeeeeeeeeeeeeee">
       <Item>
@@ -51,7 +56,7 @@ const SingleNews = () => {
           <Small>{new Date(time).toString().split('(')[0]}</Small>
         </div>
       </Item>
-      <Comments comments={kids}></Comments>
+      <Comments commentsIds={kids}></Comments>
     </SingleItemWrapper>
   );
 };

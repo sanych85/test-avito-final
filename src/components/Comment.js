@@ -14,13 +14,12 @@ const Comment = ({ urlID, type, padding }) => {
       setComment(data);
     });
   }, []);
-  let initialPadding = 5;
-  console.log('type,', type);
+
   const getComments = () => {
     if (type !== 'moreComments') {
-      console.log('type не равен');
+      // console.log('type не равен');
       return (
-        <>
+        <div className="comment">
           <p>{text}</p>
           {kids && kids.length > 0 ? (
             <Button
@@ -33,17 +32,23 @@ const Comment = ({ urlID, type, padding }) => {
           )}
           <p>{by}</p>
           {moreComments && (
-            <Comments
-              padding={padding}
-              comments={kids}
-              type="moreComments"></Comments>
+            <>
+              {/* <p>{text}</p>
+              <p>{by}</p> */}
+              <Comments
+                padding={padding}
+                comments={kids}
+                type="moreComments"></Comments>
+            </>
           )}
-        </>
+        </div>
       );
     } else {
-      console.log('type равен');
+      // console.log('type равен');
       return (
         <>
+          <p>{text}</p>
+          <p>{by}</p>
           {kids && kids.length > 0 ? (
             <Comments
               padding={padding}
@@ -51,8 +56,8 @@ const Comment = ({ urlID, type, padding }) => {
               type="moreComments"></Comments>
           ) : (
             <>
-              <p>{text}</p>
-              <p>{by}</p>
+              {/* <p>{text}</p>
+              <p>{by}</p> */}
             </>
           )}
         </>
@@ -65,7 +70,7 @@ const Comment = ({ urlID, type, padding }) => {
   //     return <Comments comments = {kids}></Comments>
   // }
   return (
-    <SingleCommentWrapper color = {type? "#eadede": "#fbfbfb"}>
+    <SingleCommentWrapper color={type ? '#eadede' : '#fbfbfb'}>
       {getComments()}
       {/* <p>{text}</p>
       {kids && kids.length > 0 ? (
@@ -89,7 +94,7 @@ const Comment = ({ urlID, type, padding }) => {
 export default Comment;
 
 const SingleCommentWrapper = styled.div`
-background-color: ${props=> props.color};
+  background-color: ${(props) => props.color};
   border: 1px solid #000;
   margin: 10px;
   p {
@@ -99,7 +104,6 @@ background-color: ${props=> props.color};
 `;
 
 const Button = styled.button`
-  
   background-color: ${(props) => props.color || '#edecff'};
   .active {
     background-color: red !important;

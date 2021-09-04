@@ -20,7 +20,7 @@ const News = () => {
         <span>Loading!!</span>
       ) : (
           <NewsWrapper>
-             {news&& news.length>0 && news.map(oneNews=><OneNews key = {oneNews.id} id={oneNews.id} {...oneNews}></OneNews>)}
+             {news&& news.length>0 && news.map(oneNews=><OneNews key = {oneNews.id} {...oneNews}></OneNews>)}
           </NewsWrapper>
    
       )}

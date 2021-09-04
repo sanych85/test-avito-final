@@ -11,3 +11,11 @@ export const getInfo  = async (type, url)=> {
    
       
    }
+
+
+//   export const getSingePostAndComments 
+
+
+// export const getItem = (arr, param)=> {
+//    return arr.find(item=>item[param]=param)
+// }
