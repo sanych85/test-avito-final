@@ -1,92 +1,70 @@
-import React, { useEffect, useState } from 'react';
-import { getInfo } from '../utils';
-import { baseUrl } from '../apiInfo';
+import React, { useState } from 'react';
 import { Comments } from '.';
-import styled, { css } from 'styled-components';
-const Comment = ({ urlID, type, padding }) => {
-  const url = `${baseUrl}/item/${urlID}.json?print=pretty`;
+import styled from 'styled-components';
+import { AuthorAndDate } from './';
+import { AiOutlineDown,AiOutlineUp } from 'react-icons/ai';
+import { Button } from '.';
+const Comment = ({ type, padding, text, kids, by, time }) => {
 
-  const [comment, setComment] = useState({});
   const [moreComments, setMoreComments] = useState(false);
-  const { kids, text, by } = comment;
-  useEffect(() => {
-    getInfo('get', url).then(({ data }) => {
-      setComment(data);
-    });
-  }, []);
 
+  const getMoreComments = ()=> {
+    setMoreComments((prev) => !prev)
+  }
   const getComments = () => {
     if (type !== 'moreComments') {
-      // console.log('type не равен');
       return (
         <div className="comment">
+           
           <p>{text}</p>
           {kids && kids.length > 0 ? (
             <Button
-              onClick={() => setMoreComments((prev) => !prev)}
-              color={moreComments ? '#ffdbdb' : ''}>
+              func= {getMoreComments}
+              color={moreComments ? 'white' : 'white'}
+              backgroundColor = {moreComments ? "#DF9564": "#A68D7C"}
+              >
               {moreComments ? 'Close Responses' : 'Watch responses'}
+              {moreComments ? <AiOutlineUp/> : <AiOutlineDown/>}
+
             </Button>
+
           ) : (
             ''
           )}
-          <p>{by}</p>
+          <AuthorAndDate by={by} time={time} padding="10px" />
+
           {moreComments && (
             <>
-              {/* <p>{text}</p>
-              <p>{by}</p> */}
               <Comments
                 padding={padding}
-                comments={kids}
+                commentsIds={kids}
                 type="moreComments"></Comments>
             </>
           )}
         </div>
       );
     } else {
-      // console.log('type равен');
       return (
         <>
-          <p>{text}</p>
-          <p>{by}</p>
+        
+          <TextComment>{text}</TextComment>
+          <AuthorAndDate by={by} time={time} />
           {kids && kids.length > 0 ? (
             <Comments
               padding={padding}
-              comments={kids}
+              commentsIds={kids}
               type="moreComments"></Comments>
           ) : (
-            <>
-              {/* <p>{text}</p>
-              <p>{by}</p> */}
-            </>
+            <></>
           )}
         </>
       );
     }
   };
 
-  // const getMoreComments = ()=> {
-  //     console.log("in more comments")
-  //     return <Comments comments = {kids}></Comments>
-  // }
   return (
     <SingleCommentWrapper color={type ? '#eadede' : '#fbfbfb'}>
       {getComments()}
-      {/* <p>{text}</p>
-      {kids && kids.length > 0 ? (
-        <button onClick={() => setMoreComments((prev) => !prev)}>
-          Watch response
-        </button>
-      ) : (
-        ''
-      )}
-      {moreComments && (
-        <Comments
-          padding={padding}
-          comments={kids}
-          type="moreComments"></Comments>
-      )}
-      <p>{by}</p> */}
     </SingleCommentWrapper>
   );
 };
@@ -103,9 +81,14 @@ const SingleCommentWrapper = styled.div`
   }
 `;
 
-const Button = styled.button`
-  background-color: ${(props) => props.color || '#edecff'};
-  .active {
-    background-color: red !important;
-  }
-`;
+// const Button = styled.button`
+//   background-color: ${(props) => props.color || '#edecff'};
+//   padding: 0.5rem 1rem;
+//   .active {
+//     background-color: red !important;
+//   }
+// `;
+
+const TextComment = styled.p `
+word-wrap: break-word;
+`

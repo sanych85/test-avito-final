@@ -1,12 +1,16 @@
-
 .App {
   /* display: flex;
   justify-content: center; */
   text-align: center;
-  background-color:#d4d4d4;
-  min-height: 100vh;
+  background-color: #eeccbc;
+  box-sizing: border-box;
 }
-
+button {
+  border: none;
+  outline: none;
+  width: max-content;
+  border-radius: 5px;
+}
 .App-logo {
   height: 40vmin;
   pointer-events: none;

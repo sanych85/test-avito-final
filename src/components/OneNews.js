@@ -1,40 +1,26 @@
-import React, { useEffect, useState } from 'react';
-import { useHistory, useParams } from 'react-router';
 import styled from 'styled-components';
-import { getInfo } from '../utils';
 import { Heading } from './Heading';
 import { Link } from 'react-router-dom';
-import { baseUrl } from '../apiInfo';
-const OneNews = ({ idUrl ,  id,
-  score,
-  by,
-  title,
-  time,
-  url,
-  kids
-  }) => {
-  const history = useHistory();
-  const params = useParams();
+import { AuthorAndDate } from '.';
+import { FcRating } from 'react-icons/fc';
+import {device} from "./deviceSize"
 
-  const urlLink = `${baseUrl}/item/${idUrl}.json?print=pretty`;
-
-console.log("kids", kids)
-  
+const OneNews = ({ id, score, by, title, time, descedents }) => {
+  console.log('device', device)
   return (
     <ListItem>
       <Heading>{title}</Heading>
-
       <Link to={`/news/${id}`}>Link</Link>
-      <p></p>
+      <p className="score">
+        {' '}
+        <FcRating /> score: {score}
+      </p>
 
-      <div className="bottom">
-        <p className="score">score: {score}</p>
-        <div className="small-wrapper">
+      <AuthorAndDate by={by} time={time} direction="column"></AuthorAndDate>
+      {/* <div className="small-wrapper">
           <Small>Author: {by}</Small>
           <Small>{new Date(time).toString().split('(')[0]}</Small>
-        </div>
-      </div>
-
+        </div> */}
     </ListItem>
   );
 };
@@ -42,22 +28,33 @@ console.log("kids", kids)
 const ListItem = styled.li`
   display: flex;
   flex-direction: column;
-
   justify-content: space-between;
-  border: 1px solid #000;
+  /* border: 1px solid #000; */
+  background-color: #f3dcd1;
   list-style: none;
   width: 30%;
   margin: 1rem;
-  width: 30%;
+
   position: relative;
-  /* height: 100%; */
-  /* height: 170px; */
+  -webkit-box-shadow: -5px -5px 5px -5px rgba(34, 60, 80, 0.6) inset;
+  -moz-box-shadow: -5px -5px 5px -5px rgba(34, 60, 80, 0.6) inset;
+  box-shadow: -5px -5px 5px -5px rgba(34, 60, 80, 0.6) inset;
+  margin: 0.5rem;
+
+  @media ${device.laptop} { 
+   width: 40%
+  }
+  @media ${device.tablet} { 
+   width: 90%
+  }
+
   .bottom {
     display: flex;
     flex-direction: row;
+    justify-content: space-between;
 
     .score {
-      color: blue;
+      color: grey;
       width: 20%;
     }
     .small-wrapper {
@@ -80,17 +77,6 @@ const ListItem = styled.li`
   }
 `;
 
-const Small = styled.small`
-  order: 999;
-  color: grey;
 
-  margin-right: 5px;
-`;
-
-const StyledLink = styled(Link)`
-  align-items: center;
-  padding: 0.3rem 0.7rem;
-  background: #634634;
-`;
 
 export default OneNews;

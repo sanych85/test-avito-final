@@ -19,10 +19,11 @@ export const Heading = ({type, children, ...restProps})=> {
 
 const baseStyle = css `
 text-align:center;
-color: ${props=>props.color|| props.theme.secondaryColor || "violet" };
+color: ${({color})=>color||  "#705C53" };
 text-transform: uppercase;
 padding-left:1rem;
 padding-right: 1rem;
+margin: 1rem;
 
 `
 
@@ -43,12 +44,12 @@ font-size: 1.5rem;
 `
 export const H4 = styled.h4 `
 ${baseStyle};
-font-size: 1.2rem;
+font-size: 1.05rem;
 
 `
 export const H5 = styled.h5 `
 ${baseStyle};
-font-size: 1.1rem;
+font-size: 1.02rem;
 
 `
 

@@ -7,7 +7,7 @@ export const getNews =(url) => async(dispatch)=> {
         const {data} = await axios.get(url);
         console.log(data)
         
-        const promises = data.slice(0,10).map(item=> 
+        const promises = data.slice(0,100).map(item=> 
             axios.get(`https://hacker-news.firebaseio.com/v0/item/${item}.json`)
         );
         console.log(promises)
@@ -18,7 +18,7 @@ export const getNews =(url) => async(dispatch)=> {
 
     }
     catch(err) {
-        console.log(err)
+        dispatch({type: FETCH_NEWS_FAIL, payload:err})
     }
     
 }

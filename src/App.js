@@ -1,27 +1,42 @@
-import { Provider } from "react-redux";
-import "./App.css"
-import {BrowserRouter, Route, Switch} from "react-router-dom"
-import News from "./pages/News";
-import SingleNew from "./pages/SingleNews";
-import Test from "./pages/Test";
-import store from "./redux/store";
-import {OneNews} from "./components"
+import { Provider } from 'react-redux';
+import './App.css';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import News from './pages/News';
+import SingleNew from './pages/SingleNews';
+import Page404 from "./pages/Page404"
+import store from './redux/store';
+import Header from './components/Header';
+import Footer from './components/Footer';
+import styled from 'styled-components';
+
 function App() {
-const route = "https://www.udemy.com/course/react-tutorial-and-projects-course/learn/lecture/23208170#overview"
+
   return (
-    <Provider store = {store}>
+    <Provider store={store}>
       <div className="App">
+        <Header/>
+        <Main>
           <BrowserRouter>
             <Switch>
-              <Route path = "/" exact component = {News}></Route>
-              <Route path = "/news/:id" component = {SingleNew}></Route>
-              
+              <Route path="/" exact component={News}></Route>
+              <Route path="/news/:id" component={SingleNew}></Route>
+              <Route path="*" component={Page404}></Route>
             </Switch>
           </BrowserRouter>
-      
+        </Main>
+        <Footer />
       </div>
     </Provider>
   );
 }
+
+const Main =  styled.main `
+min-height: calc(100vh - 160px);
+display: flex;
+flex-direction: column;
+/* justify-content: center;
+align-items: center; */
+
+`
 
 export default App;
