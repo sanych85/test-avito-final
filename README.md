@@ -1,11 +1,11 @@
 Hello everyone.
-This is test-avito Project
+This is test-avito project
 
-It was created by Alexandr Shatokhin using following stack
+It was created by Alexandr Shatokhin using following stack:
 - React, including React hooks
 - Redux
 - Redux-thunk
-- Styled Components
+- Styled components
 - Enzyme
 - React icons
 
