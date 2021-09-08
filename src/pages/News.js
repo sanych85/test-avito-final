@@ -6,16 +6,20 @@ import styled from 'styled-components';
 import { getNews } from '../redux/actionsCreators';
 import { newsUrl } from '../apiInfo';
 import { LoadingSpinner } from '../components';
-import {device} from "../components/deviceSize";
+import { device } from '../components/deviceSize';
 import { UpdateInfo } from '../components';
 const News = () => {
   const dispatch = useDispatch();
-  const { news, loading,error } = useSelector((store) => store.news);
+  const { news, loading, error } = useSelector((store) => store.news);
   console.log('news', news);
 
-  useEffect(() => {
-    dispatch(getNews(newsUrl));
-  }, [newsUrl], dispatch);
+  useEffect(
+    () => {
+      dispatch(getNews(newsUrl));
+    },
+    [newsUrl],
+    dispatch
+  );
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -26,21 +30,22 @@ const News = () => {
       clearTimeout(timer);
     };
   });
-  
-  const updateNews = ()=> {
+
+  const updateNews = () => {
     dispatch(getNews(newsUrl));
-  }
+  };
 
   return (
     <Wrapper>
       {loading ? (
-        <LoadingSpinner item=  "news"/>
-      ) : 
-     
-      (
-        error? <p>{error}</p>:
+        <LoadingSpinner item="news" />
+      ) : error ? (
+        <p>{error}</p>
+      ) : (
         <MainWrapper>
-          <Button  func = {updateNews} backgroundColor="transparent" ><UpdateInfo width = "30px" height = "30px"/></Button>
+          <Button func={updateNews} backgroundColor="transparent">
+            <UpdateInfo width="30px" height="30px" />
+          </Button>
           <NewsWrapper>
             {news &&
               news.length > 0 &&
@@ -56,13 +61,12 @@ const News = () => {
 
 export default News;
 
-
-const MainWrapper = styled.section `
-display: flex;
-flex-direction: column;
-justify-content: center;
-align-items: center;
-`
+const MainWrapper = styled.section`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+`;
 const Wrapper = styled.section`
   display: flex;
   /* flex-direction: column; */
@@ -77,10 +81,10 @@ const NewsWrapper = styled.ul`
   flex-wrap: wrap;
   width: 70%;
   padding: 0rem;
-  @media ${device.laptop} { 
-   width: 90%
+  @media ${device.laptop} {
+    width: 90%;
   }
-  @media ${device.mobileL} { 
-   width: 100%
+  @media ${device.mobileL} {
+    width: 100%;
   }
 `;

@@ -6,21 +6,18 @@ import { FcRating } from 'react-icons/fc';
 import {device} from "./deviceSize"
 
 const OneNews = ({ id, score, by, title, time, descedents }) => {
-  console.log('device', device)
+  
   return (
     <ListItem>
       <Heading>{title}</Heading>
       <Link to={`/news/${id}`}>Link</Link>
       <p className="score">
-        {' '}
+
         <FcRating /> score: {score}
       </p>
 
       <AuthorAndDate by={by} time={time} direction="column"></AuthorAndDate>
-      {/* <div className="small-wrapper">
-          <Small>Author: {by}</Small>
-          <Small>{new Date(time).toString().split('(')[0]}</Small>
-        </div> */}
+
     </ListItem>
   );
 };

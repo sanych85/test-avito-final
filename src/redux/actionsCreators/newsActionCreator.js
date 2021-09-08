@@ -5,15 +5,13 @@ export const getNews =(url) => async(dispatch)=> {
     dispatch({type:FETCH_NEWS_REQUEST })
     try {
         const {data} = await axios.get(url);
-        console.log(data)
-        
+
         const promises = data.slice(0,100).map(item=> 
             axios.get(`https://hacker-news.firebaseio.com/v0/item/${item}.json`)
         );
-        console.log(promises)
+     
         const result = await (await Promise.all(promises)).map(item=>item.data);
-        console.log("news result",  result)
-        console.log( "reduced array",result)
+
         dispatch({type:FETCH_NEWS_SUCCESS, payload: result})
 
     }

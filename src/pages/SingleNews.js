@@ -15,27 +15,21 @@ import { GoLink } from 'react-icons/go';
 import { IoMdArrowRoundBack } from 'react-icons/io';
 const SingleNews = () => {
   const news = useSelector((state) => state.news.news);
-  console.log('news', news);
   const history = useHistory();
   const params = useParams();
-  console.log('history', history);
-  console.log('params', params);
+
   const idUrl = params.id;
   const [singleNews, setSingleNews] = useState({});
   const [isLoading, setIsLoading] = useState(false);
   const { by, title, url, time, kids, descendants } = singleNews;
 
   const urlLink = `${baseUrl}/item/${idUrl}.json?print=pretty`;
-  console.log(urlLink);
 
   useEffect(() => {
     setIsLoading(true);
     getInfo('get', urlLink).then(({ data }) => {
-      console.log('data', data);
-
       const { id, score, by, title, time, url, kids, descendants } = data;
-      console.log('kids', kids);
-      console.log('descendants', descendants);
+
       setSingleNews({
         id,
         score,
@@ -53,11 +47,8 @@ const SingleNews = () => {
   useEffect(() => {
     const timer = setInterval(() => {
       getInfo('get', urlLink).then(({ data }) => {
-        console.log('data', data);
-
         const { id, score, by, title, time, url, kids, descendants } = data;
-        console.log(data, 'data');
-        console.log('kids', kids);
+
         setSingleNews({
           id,
           score,
@@ -97,18 +88,21 @@ const SingleNews = () => {
               Watch news
             </StyledLink>
 
-            <BottomInfoWrapper >
-            <Button className = "button_goback" func={goBack} backgroundColor="#D9B8A3" color="#593c28">
-              <IoMdArrowRoundBack/>
+            <BottomInfoWrapper>
+              <Button
+                className="button_goback"
+                func={goBack}
+                backgroundColor="#D9B8A3"
+                color="#593c28">
+                <IoMdArrowRoundBack />
               </Button>
               <AuthorAndDate
                 by={by}
                 time={time}
                 padding="3px"
                 direction="column"
-                color = "#DF9564"
+                color="#DF9564"
               />
-
             </BottomInfoWrapper>
           </Item>
 
@@ -165,12 +159,12 @@ const Item = styled.div`
     align-items: flex-end;
   }
 `;
-const BottomInfoWrapper = styled.div `
-.button_goback {
-   margin-right: 0rem;
-   margin-left:2rem;
-}
-display: flex;
-justify-content: space-between;
-`
+const BottomInfoWrapper = styled.div`
+  .button_goback {
+    margin-right: 0rem;
+    margin-left: 2rem;
+  }
+  display: flex;
+  justify-content: space-between;
+`;
 export default SingleNews;

@@ -28,9 +28,10 @@ const Comments = ({ commentsIds, padding, type, totalComments }) => {
 
         setComments(result);
       } catch (err) {
-        setIsLoading(false);
+        
         setIsError(err);
       }
+      setIsLoading(false);
     }
 
     return;
@@ -40,7 +41,7 @@ const Comments = ({ commentsIds, padding, type, totalComments }) => {
     getComments(commentsIds);
   }, [commentsIds]);
   const updateComments = () => {
-    console.log('in udata Comments');
+
     getComments(commentsIds);
   };
 
@@ -95,7 +96,7 @@ const Comments = ({ commentsIds, padding, type, totalComments }) => {
                 })}
             </CommentsWrapper>
           )}
-          :
+          
         </>
       );
     }

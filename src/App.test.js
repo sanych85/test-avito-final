@@ -1,8 +1,17 @@
-import { render, screen } from '@testing-library/react';
-import App from './App';
+import Header from './components/Header';
+import { shallow } from 'enzyme';
 
-test('renders learn react link', () => {
-  render(<App />);
-  const linkElement = screen.getByText(/learn react/i);
-  expect(linkElement).toBeInTheDocument();
-});
+import App from "./App"
+
+describe("App",()=> {
+    let appwrapper
+    appwrapper = shallow(<App/>)
+    beforeAll(()=> {
+    })
+
+    it("Header should have props text with text ", ()=> {
+        const text  = "Hacker news"
+         const header  = appwrapper.find(Header)
+        expect(header.props().text).toEqual(text ) 
+    })
+})

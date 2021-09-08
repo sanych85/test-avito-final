@@ -10,7 +10,7 @@ export const Button = ({
   backgroundHoverColor,
   hoverColor, ...rest
 }) => {
-  console.log("rest", rest)
+
   return (
     <StyledButton
      {...rest}
